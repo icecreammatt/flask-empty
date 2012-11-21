@@ -16,9 +16,9 @@ This is my template file for new flask projects
 [Install Guide](http://flask.pocoo.org/docs/installation/)
 
 From inside the project-name folder:
-1. `virtualenv venv`
-2. `. venv/bin/activate`
-3. `pip install Flask`
+    1. `virtualenv venv`
+    2. `. venv/bin/activate`
+    3. `pip install Flask`
 
 
 3. Run Sample:
