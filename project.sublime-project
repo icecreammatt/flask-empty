@@ -1,0 +1,22 @@
+{
+    "folders":
+    [
+        {
+            "path": "/Users/matt/Projects/flask-empty",
+            "folder_exclude_patterns": ["venv", "wvenv"],
+            "file_exclude_patterns": ["*.*~"]
+        }
+    ],
+    "Python": {
+        "python": "~/Projects/flask-empty/venv/bin/python",
+        "pythonExtraPaths": ["~/Projects/flask-empty/venv/lib/python2.7/site-packages"]
+    },
+    "build_systems":
+    [
+        {
+        "name": "Run Flask",
+        "working_dir": "/Users/matt/Projects/flask-empty",
+        "cmd": ["/Users/matt/Projects/flask-empty/venv/bin/python2.7", "run.py"]
+        }
+    ]
+}

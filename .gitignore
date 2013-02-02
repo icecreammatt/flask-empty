@@ -3,5 +3,4 @@
 *.db
 *.db.backup
 *.sublime-workspace
-*.sublime-project
 venv/*
