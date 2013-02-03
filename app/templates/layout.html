@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block layout %}
+<div class="menu">
+    <a href="{{ url_for('.index') }}" class="menu_item">Home</a>
+</div>
+<div class="page">
+    {% block body %}{% endblock %}
+</div>
+{% endblock %}

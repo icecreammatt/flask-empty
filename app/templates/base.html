@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Cookbook</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/core.css' ) }}">
+    <meta charset="utf-8">
+</head>
+<body>
+        {% for message in get_flashed_messages(category_filter=["message"]) %}
+            <div class="flash-message"><span>{{ message }}</span></div>
+        {% endfor %}
+        {% for success in get_flashed_messages(category_filter=["success"]) %}
+            <div class="flash-message"><span class='success'>{{ success }}</span></div>
+        {% endfor %}
+        {% for error in get_flashed_messages(category_filter=["error"]) %}
+            <div class="flash-message"><span class='fail'>{{ error }}</span></div>
+        {% endfor %}
+        {% block layout %}{% endblock %}
+</body>
+</html>

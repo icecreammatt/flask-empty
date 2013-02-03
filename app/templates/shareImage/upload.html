@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="header">
+    <div class="title">Upload</div>
+    <form method="POST" enctype="multipart/form-data" action="{{ url_for('.upload') }}">
+    File to upload: <input type="file" name="upfile"><br>
+    <input type="submit" value="Press"> to upload the file!
+    </form>
+    <br/>
+</div>
+{% endblock %}
