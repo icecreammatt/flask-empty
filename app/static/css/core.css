@@ -1,0 +1,19 @@
+body {
+    margin: auto;
+    background: rgb(238, 238, 238);
+}
+div.image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+div.image img {
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 0 15px #333;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    margin-top: 25px;
+    cursor: -webkit-zoom-in; cursor: -moz-zoom-in;
+}

@@ -8,6 +8,10 @@ import os
 from flask import Flask, request, redirect, url_for
 from werkzeug import secure_filename
 from flask import send_from_directory
+import hashlib
+import base64
+import hmac
+import time
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 STORAGE_FOLDER = 'http://localhost/i/'
@@ -16,14 +20,29 @@ UPLOAD_FOLDER = '/tmp/upload'
 # mod.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # mod.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
+def getImageJson(filename):
+    imagePath = str(STORAGE_FOLDER + filename)
+
+    upload = {
+        'image' : {},
+        'links' : {
+            'original': imagePath
+        }
+    }
+    return upload
+
 @mod.route('/test')
 def index():
-    return render_template('shareImage/index.html')
+    pass
 
-@mod.route('/i/<filename>')
+@mod.route('/<filename>')
 def uploaded_file(filename):
     return render_template('shareImage/image.html', path=str(STORAGE_FOLDER + filename))
     # return send_from_directory(UPLOAD_FOLDER, filename)
+
+@mod.route('/<filename>/json')
+def uploaded_file_json(filename):
+    return jsonify(upload = getImageJson(filename))
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -32,11 +51,13 @@ def allowed_file(filename):
 @mod.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        file = request.files['file']
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-            return redirect(url_for('.uploaded_file', filename=filename))
+        apikey = request.form['apikey']
+        if(apikey == 'KEY_123'):
+            file = request.files['file']
+            if file and allowed_file(file.filename):
+                name = secure_filename(generateFileName())
+                file.save(os.path.join(UPLOAD_FOLDER, name))
+                return redirect(url_for('.uploaded_file', filename=name))
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -44,5 +65,11 @@ def upload_file():
     <form action="" method=post enctype=multipart/form-data>
       <p><input type=file name=file>
          <input type=submit value=Upload>
+         <input type=text name="apikey" value="">
     </form>
     '''
+
+def generateFileName():
+    hash = hashlib.sha1()
+    hash.update(str(time.time()))
+    return base64.b64encode(hash.hexdigest())[:10]
