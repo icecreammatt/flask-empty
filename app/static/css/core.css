@@ -1,0 +1,27 @@
+body {
+    margin: auto;
+    background: #EEE;
+    width: 800px;
+    padding: 50px;
+}
+
+header {
+
+}
+
+nav {
+
+}
+
+article {
+    margin: auto;
+    width: 100%;
+    border: 1px dotted #CCC;
+    background: #FFF;
+    border-radius: 5px;
+    padding: 40px;
+}
+
+footer {
+
+}

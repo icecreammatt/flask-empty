@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h1>Hello World</h1>
+
+<h2>Some useful resources</h2>
+<ul>
+{% for r in resources %}
+    <li><a href="{{ r.address }}" target="blank">{{ r.name }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}
