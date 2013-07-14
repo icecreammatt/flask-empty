@@ -17,6 +17,10 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 STORAGE_FOLDER = 'http://img.mattcarrier.com/'
 UPLOAD_FOLDER = '/home/mattcarrier/img.mattcarrier.com/'
 
+STORAGE_FOLDER = 'http://localhost/i/'
+UPLOAD_FOLDER = '/tmp/upload'
+
+
 # mod.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # mod.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
@@ -51,12 +55,15 @@ def allowed_file(filename):
 @mod.route('/api', methods=['POST', 'GET'])
 def upload():
     if request.method == 'POST':
-        file = request.data
-        if file and allowed_file(file.filename):
+        file = request.files['file']
+        print file
+        if file:
             name = secure_filename(generateFileName())
-	    file.save(os.path.join(UPLOAD_FOLDER, name))
-	    #return redirect(url_for('.uploaded_file', filename=name))
-	    return str(STORAGE_FOLDER + name)
+        file.save(os.path.join(UPLOAD_FOLDER, name))
+        #return redirect(url_for('.uploaded_file', filename=name))
+        print 'NAME:', STORAGE_FOLDER
+        print STORAGE_FOLDER + name
+        return (STORAGE_FOLDER + name)
     return 'hi'
 
 @mod.route('/', methods=['GET', 'POST'])
