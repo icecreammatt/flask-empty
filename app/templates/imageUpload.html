@@ -1,0 +1,80 @@
+<html>
+<head>
+    <title>Quick Share</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/dropzone.css' ) }}">
+    <style type="text/css">
+      .dropzone {
+        min-height: 100%;
+      }
+    </style>
+</head>
+<body>
+    <form action="" method=post enctype=multipart/form-data
+      class="dropzone"
+      id="my-awesome-dropzone">
+      <input type=text name="apikey" id="apikey" class="apikey" value="" placeholder="Password" autofocus onkeyup="store(this)" style="display:none"/>
+    </form>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/dropzone.min.js' ) }}"></script>
+    <script type="text/javascript">
+    "use strict";
+      Dropzone.options.myAwesomeDropzone = {
+        init: function() {
+
+          this.on("success", function(file) {
+            showInput(false);
+            localStorage['key_valid'] = true;
+            var url = JSON.parse(file.xhr.response).url;
+            var imagePath = document.location.origin + '/' + JSON.parse(file.xhr.response).url
+            document.location = imagePath;
+          });
+
+          this.on("error", function(file) {
+            document.getElementById('apikey').value = '';
+            localStorage['code'] = '';
+            showInput(true);
+            localStorage['key_valid'] = false;
+          });
+
+        }
+      };
+
+      function store(element) {
+        if(supports_html5_storage()) {
+          localStorage['code'] = element.value;
+        }
+      };
+
+      function showInput(visible) {
+        document.getElementById('apikey').style.display = visible ? 'block' : 'none';
+
+      };
+
+      function supports_html5_storage() {
+        try {
+          return 'localStorage' in window && window['localStorage'] !== null;
+        } catch (e) {
+          return false;
+        }
+      };
+
+      if (supports_html5_storage()) {
+        var key = '';
+        if(localStorage['code'] !== '' || localStorage['code'] !== undefined) {
+          key = localStorage['code'];
+          if(localStorage['key_valid'] == "true") {
+            showInput(false);
+          } else {
+            showInput(true);
+          }
+          if (key == undefined) {
+            key = '';
+          };
+          document.getElementById('apikey').value = key;
+        }
+      } else {
+        showInput(true);
+      }
+
+    </script>
+</body>
+</html>

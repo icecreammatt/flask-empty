@@ -17,8 +17,8 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 STORAGE_FOLDER = 'http://img.mattcarrier.com/'
 UPLOAD_FOLDER = '/home/mattcarrier/img.mattcarrier.com/'
 
-STORAGE_FOLDER = 'http://localhost/i/'
-UPLOAD_FOLDER = '/tmp/upload'
+# STORAGE_FOLDER = 'https://localhost/i/'
+# UPLOAD_FOLDER = '/tmp/upload/i/'
 
 
 # mod.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -50,7 +50,7 @@ def uploaded_file_json(filename):
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @mod.route('/api', methods=['POST', 'GET'])
 def upload():
@@ -75,17 +75,10 @@ def upload_file():
             if file and allowed_file(file.filename):
                 name = secure_filename(generateFileName())
                 file.save(os.path.join(UPLOAD_FOLDER, name))
-                return redirect(url_for('.uploaded_file', filename=name))
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form action="" method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-         <input type=text name="apikey" value="">
-    </form>
-    '''
+                return jsonify({'status':'success', 'url':name}), 200
+        return jsonify({'status':'error'}), 401
+    return render_template('imageUpload.html')
+
 def generateFileName():
     hash = hashlib.sha1()
     hash.update(str(time.time()))

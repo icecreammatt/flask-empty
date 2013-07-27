@@ -33,7 +33,7 @@ $(document).ready(function() {
             });
         };
 
-        resizeImage($imageOri);
+        // resizeImage($imageOri);
         hideChrome($imageOri);
 
         return {
@@ -41,7 +41,8 @@ $(document).ready(function() {
         };
     }();
 
-    $(window).resize(function(){
-        gallery.resize('img');
-    });
+    // $(window).resize(function(){
+    //     gallery.resize('img');
+    // });
 });
+

@@ -1,19 +1,35 @@
 body {
     margin: auto;
     background: rgb(238, 238, 238);
-}
-div.image {
-    position: absolute;
+    overflow-x: hidden;
     width: 100%;
     height: 100%;
 }
+.image {
+    padding: 1%;
+    margin: auto;
+}
+img {
+    position: absolute;
+    max-width: 98%;
+}
+.hideborder {
+    max-width: 100%;
+    padding: 0%;
+}
+.apikey {
+    margin: auto;
+    font-size: 18pt;
+    position: absolute;
+    bottom: 0px;
+    left: 40%;
+    min-width: 110px;
+    max-width: 10%;
+    margin-bottom: 2%;
+}
 div.image img {
-    display: block;
-    margin: 0 auto;
-    box-shadow: 0 0 15px #333;
-    padding: 20px;
-    background: white;
-    border-radius: 5px;
-    margin-top: 25px;
     cursor: -webkit-zoom-in; cursor: -moz-zoom-in;
+}
+.dropzone {
+    min-height: 100%;
 }
