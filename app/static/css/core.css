@@ -6,12 +6,11 @@ body {
     height: 100%;
 }
 .image {
-    padding: 1%;
     margin: auto;
 }
 img {
     position: absolute;
-    max-width: 98%;
+    max-width: 100%;
 }
 .hideborder {
     max-width: 100%;
