@@ -14,8 +14,8 @@ import hmac
 import time
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-STORAGE_FOLDER = 'http://img.mattcarrier.com/'
-UPLOAD_FOLDER = '/home/mattcarrier/img.mattcarrier.com/'
+STORAGE_FOLDER = 'http://img.mattcarrier.net/'
+UPLOAD_FOLDER = '/data/'
 
 # STORAGE_FOLDER = 'https://localhost/i/'
 # UPLOAD_FOLDER = '/tmp/upload/i/'
